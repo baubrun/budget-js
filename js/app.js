@@ -46,7 +46,14 @@ class App {
     this.expenseList.appendChild(div)
   }
 
-  deleteExpense(elem) {}
+  deleteExpense(elem) {
+    const id = parseInt(elem.dataset.id)
+    const parent = elem.parentElement.parentElement.parentElement
+    this.expenseList.removeChild(parent)
+    const remainder = this.itemList.filter((item => item.id !== id))
+    this.itemList = remainder
+    this.showBalance()
+  }
 
   editExpense(elem) {
     const id = parseInt(elem.dataset.id)
@@ -55,12 +62,7 @@ class App {
     const expense = this.itemList.find((item => item.id === id))
     this.expenseInput.value = expense.title
     this.amountInput.value = expense.amount
-    console.log('this.expenseInput.value :>>', this.expenseInput.value)
-    console.log('this.expenseAmount.value :>>', this.expenseAmount.value)
-    console.log('expense :>>', expense)
-    console.log('this.itemList :>>', this.itemList)
     const remainder = this.itemList.filter((item => item.id !== id))
-    console.log('remainder :>>', remainder)
     this.itemList = remainder
     this.showBalance()
   }
