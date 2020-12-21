@@ -46,13 +46,32 @@ class App {
     this.expenseList.appendChild(div)
   }
 
+  deleteExpense(elem) {}
+
+  editExpense(elem) {
+    const id = parseInt(elem.dataset.id)
+    const parent = elem.parentElement.parentElement.parentElement
+    this.expenseList.removeChild(parent)
+    const expense = this.itemList.find((item => item.id === id))
+    this.expenseInput.value = expense.title
+    this.amountInput.value = expense.amount
+    console.log('this.expenseInput.value :>>', this.expenseInput.value)
+    console.log('this.expenseAmount.value :>>', this.expenseAmount.value)
+    console.log('expense :>>', expense)
+    console.log('this.itemList :>>', this.itemList)
+    const remainder = this.itemList.filter((item => item.id !== id))
+    console.log('remainder :>>', remainder)
+    this.itemList = remainder
+    this.showBalance()
+  }
+
   totalExpense() {
     let total = 0
-    if (this.itemList.length > 0){
+    if (this.itemList.length > 0) {
       total = this.itemList.reduce((total, item) => {
         total += item.amount
         return total
-      }, 0) 
+      }, 0)
     }
     this.expenseAmount.textContent = total
     return total
@@ -109,7 +128,7 @@ class App {
       this.expenseInput.value = ""
 
       const expense = {
-        id: this.itemID,
+        id: this.itemID++,
         title: expenseName,
         amount,
       }
@@ -119,10 +138,6 @@ class App {
       this.showBalance()
     }
   }
-
-
-
-
 
 }
 
@@ -136,15 +151,20 @@ const eventListeners = () => {
 
   budgetForm.addEventListener("submit", (evt) => {
     evt.preventDefault()
-    app.submitBudgetForm(evt.target.value)
+    app.submitBudgetForm()
   })
   expenseForm.addEventListener("submit", (evt) => {
     evt.preventDefault()
     app.submitExpenseForm()
   })
-  // expenseList.addEventListener("click", (evt) => {
+  expenseList.addEventListener("click", (evt) => {
+    if (evt.target.parentElement.classList.contains("edit-icon")) {
+      app.editExpense(evt.target.parentElement)
+    } else if (evt.target.parentElement.classList.contains("delete-icon")) {
+      app.deleteExpense(evt.target.parentElement)
 
-  // })
+    }
+  })
 
 }
 
