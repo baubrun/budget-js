@@ -1,9 +1,8 @@
 :root {
-  --mainWhite: #f5f5f5f5;
+  --mainWhite: #f2f2f2;
   --mainDark: #333333;
-  --mainGreen: #317b22;
-  --mainRed: #b80c09;
-  --mainBlue: #05668d;
+  --mainGreen: #00cc99;
+  --mainRed: #ff4d4d;
   --mainGray: #666699;
 }
 
@@ -40,6 +39,8 @@ budget
 .budget-submit:hover {
   background: var(--mainGreen);
   color: var(--mainDark);
+  font-weight: bolder;
+
 }
 
 
@@ -47,6 +48,8 @@ budget
   background: transparent;
   border: 0.1rem solid var(--mainGreen);
   color: var(--mainGreen);
+  font-size: larger;
+
 }
 
 /*===========
@@ -80,10 +83,13 @@ expense
   background: transparent;
   border: 0.1rem solid var(--mainRed);
   color: var(--mainRed);
+  font-weight: bolder;
+  font-size: larger;
+
 }
 .expense-submit:hover {
   background: var(--mainRed);
-  color: var(--mainWhite);
+  /* color: var(white); */
 }
 
 .expense-item {
@@ -111,7 +117,7 @@ icon
   text-decoration: none !important;
 }
 .edit-icon:hover {
-  color: var(--mainBlue);
+  color: var(--mainGray);
 }
 .delete-icon:hover {
   color: var(--mainRed);
@@ -163,7 +169,7 @@ media query
   .expense-icon,
   .balance-icon {
     font-size: 3.5rem;
-    color: var(--mainBlue);
+    color: var(--mainGray);
   }
 }
 .list-item {
