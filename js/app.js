@@ -27,7 +27,7 @@ class App {
     const div = document.createElement("div")
     div.classList.add("expense")
     div.innerHTML = `
-    <div class="expense-item d-flex justify-content-between align-items-baseline">
+    <div class="expense-item d-flex justify-content-between align-items-baseline mb-4">
 
          <h6 class="expense-title mb-0 text-uppercase list-item">${expense.title}</h6>
          <h5 class="expense-amount mb-0 list-item">${expense.amount}</h5>
@@ -47,7 +47,14 @@ class App {
   }
 
   totalExpense() {
-    let total = 400
+    let total = 0
+    if (this.itemList.length > 0){
+      total = this.itemList.reduce((total, item) => {
+        total += item.amount
+        return total
+      }, 0) 
+    }
+    this.expenseAmount.textContent = total
     return total
   }
 
@@ -105,11 +112,11 @@ class App {
         id: this.itemID,
         title: expenseName,
         amount,
-
       }
 
       this.itemList = [...this.itemList, expense]
       this.addExpense(expense)
+      this.showBalance()
     }
   }
 
